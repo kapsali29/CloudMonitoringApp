@@ -1,0 +1,18 @@
+ // Pods deployed on a node
+
+MATCH (p:Pod)-[r:DEPLOYED_AT]->(n:K8SNode)
+RETURN p, r, n
+
+ // Get Node role and info
+
+MATCH (n:K8SNode)-[r1:HAS_INFO]->(ninfo:NodeInfo)
+MATCH (n)-[r2:HAS_ROLE]->(nrole:NodeRole)
+RETURN n, r1, ninfo, r2, nrole
+
+// get pod metrics
+
+MATCH (p:Pod {pod_id: "neo4j-0"})-[r:RECORDS]->(m:Metric)
+RETURN p, r, m
+
+
+
